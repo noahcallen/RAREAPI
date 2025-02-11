@@ -9,7 +9,7 @@ public class User
   public string Bio { get; set; }
   public string Username { get; set; }
   public string Password { get; set; }
-  public DateTime { get; set; }
+  public DateTime CreatedOn { get; set; }
   public List<Subscription> Subscriptions { get; set; }
   public List<PostReaction> PostReactions { get; set; }
   public List<Comment> Comments { get; set; }
