@@ -1,0 +1,6 @@
+@RAREAPI_HostAddress = http://localhost:5040
+
+GET {{RAREAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
