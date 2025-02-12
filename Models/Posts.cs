@@ -10,12 +10,22 @@ public class Post
   public DateTime PublicationDate { get; set; }
   public string Content { get; set; }
   public bool Approved { get; set; }
-  // public List<Comment> Comments { get; set; }
-  // public List<PostTag> PostTags { get; set; }
-  // public User User { get; set; }
-  // public Category Category { get; set; }
+  public List<Comment> Comments { get; set; }
+  public List<PostTag> PostTags { get; set; }
+  public User User { get; set; }
+  public Category Category { get; set; }
 
-  public Post(int id, int userId, string title, DateTime publicationDate, string content, bool approved)
+  public Post(
+    int id,
+    int userId,
+    string title,
+    DateTime publicationDate,
+    string content,
+    bool approved
+    List<Comment> comments = null,
+    List<PostTag> postTags = null,
+    User user = null,
+    Category category = null)
   {
     Id = id;
     UserId = userId;
@@ -23,5 +33,9 @@ public class Post
     PublicationDate = publicationDate;
     Content = content;
     Approved = approved;
+    Comments = comments ?? new List<Comment>();
+    PostTags = postTags ?? new List<PostTag>();
+    User = user;
+    Category = category;
   }
 }

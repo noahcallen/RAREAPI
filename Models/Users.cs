@@ -10,10 +10,10 @@ public class User
   public string Username { get; set; }
   public string Password { get; set; }
   public DateTime CreatedOn { get; set; }
-  // public List<Subscription> Subscriptions { get; set; }
-  // public List<PostReaction> PostReactions { get; set; }
-  // public List<Comment> Comments { get; set; }
-  // public List<Post> Posts { get; set; }
+  public List<Subscription> Subscriptions { get; set; }
+  public List<PostReaction> PostReactions { get; set; }
+  public List<Comment> Comments { get; set; }
+  public List<Post> Posts { get; set; }
 
   public User(int id, string firstName, string lastName, string email, string bio, string username, string password)
   {
@@ -24,5 +24,9 @@ public class User
     Bio = bio;
     Username = username;
     Password = password;
+    Subscriptions = subscriptions ?? new List<Subscription>();
+    PostReactions = postReactions ?? new List<PostReaction>();
+    Comments = comments ?? new List<Comment>();
+    Posts = posts ?? new List<Post>();
   }
 }
