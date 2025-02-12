@@ -15,7 +15,18 @@ public class User
   public List<Comment> Comments { get; set; }
   public List<Post> Posts { get; set; }
 
-  public User(int id, string firstName, string lastName, string email, string bio, string username, string password)
+  public User(
+      int id,
+      string firstName,
+      string lastName,
+      string email,
+      string bio,
+      string username,
+      string password,
+      List<Subscription> subscriptions = null,
+      List<PostReaction> postReactions = null,
+      List<Comment> comments = null,
+      List<Post> posts = null)
   {
     Id = id;
     FirstName = firstName;
