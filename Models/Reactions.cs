@@ -1,14 +1,15 @@
 namespace RAREAPI.Models;
 
-public class PostReaction
+public class Reaction
 {
   public int Id { get; set; }
   public int Emoji { get; set; }
   public List<PostReaction> PostReactions { get; set; }
 
-  public PostReaction(int id, int emoji)
+  public Reaction (int id, int emoji)
   {
     Id = id;
     Emoji = emoji;
   }
 }
+//test
