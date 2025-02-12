@@ -6,5 +6,13 @@ public class Subscription
   public int FollowerId { get; set; }
   public int AuthorId { get; set; }
   public DateTime CreatedOn { get; set; }
-  public User User { get; set; }
+  // public User User { get; set; }
+
+  public Subscription(int id, int followerId, int authorId, DateTime createdOn)
+  {
+    Id = id;
+    FollowerId = followerId;
+    AuthorId = authorId;
+    CreatedOn = createdOn;
+  }
 }
