@@ -65,48 +65,47 @@ List<Reaction> reactions = new List<Reaction>
 };
 
 
-
 // Step 1: Declare posts without postTags
 List<Post> posts = new List<Post>
 {
-    new Post(1, 1, "The Future of AI", new DateTime(2025, 02, 01), 
-        "AI is evolving rapidly. Here’s what to expect in the next decade.", 
-        true, 
-        new List<Comment> { comments[0], comments[1] }, 
+    new Post(1, 1, "The Future of AI", new DateTime(2025, 02, 01),
+        "AI is evolving rapidly. Here’s what to expect in the next decade.",
+        true,
+        new List<Comment> { comments[0], comments[1] },
         new List<PostTag>(), // Empty for now
-        users[0], 
+        users[0],
         categories[1]),
 
-    new Post(2, 2, "Web Development in 2025", new DateTime(2025, 01, 25), 
-        "The latest trends in web development, from frameworks to design.", 
-        true, 
-        new List<Comment> { comments[2] }, 
+    new Post(2, 2, "Web Development in 2025", new DateTime(2025, 01, 25),
+        "The latest trends in web development, from frameworks to design.",
+        true,
+        new List<Comment> { comments[2] },
         new List<PostTag>(), // Empty for now
-        users[1], 
+        users[1],
         categories[0]),
 
-    new Post(3, 3, "Cloud Security Best Practices", new DateTime(2025, 01, 20), 
-        "How to secure your cloud infrastructure in 2025.", 
-        true, 
-        new List<Comment> { comments[3] }, 
+    new Post(3, 3, "Cloud Security Best Practices", new DateTime(2025, 01, 20),
+        "How to secure your cloud infrastructure in 2025.",
+        true,
+        new List<Comment> { comments[3] },
         new List<PostTag>(), // Empty for now
-        users[2], 
+        users[2],
         categories[2]),
 
-    new Post(4, 4, "Data Science and AI: A Perfect Match", new DateTime(2025, 01, 15), 
-        "Exploring how AI and data science work together for better insights.", 
-        true, 
-        new List<Comment> { comments[4] }, 
+    new Post(4, 4, "Data Science and AI: A Perfect Match", new DateTime(2025, 01, 15),
+        "Exploring how AI and data science work together for better insights.",
+        true,
+        new List<Comment> { comments[4] },
         new List<PostTag>(), // Empty for now
-        users[3], 
+        users[3],
         categories[4]),
 
-    new Post(5, 5, "Building Scalable Applications", new DateTime(2025, 01, 10), 
-        "A guide to architecting scalable applications in the modern era.", 
-        true, 
-        new List<Comment>(), 
+    new Post(5, 5, "Building Scalable Applications", new DateTime(2025, 01, 10),
+        "A guide to architecting scalable applications in the modern era.",
+        true,
+        new List<Comment>(),
         new List<PostTag>(), // Empty for now
-        users[4], 
+        users[4],
         categories[5])
 };
 
@@ -129,9 +128,14 @@ List<PostTag> postTags = new List<PostTag>
     new PostTag(5, 3, tags[2], posts[4])  // Cloud tag for "Building Scalable Applications"
 };
 
-
-
-
+List<PostReaction> postReactions = new List<PostReaction>
+{
+    new PostReaction(1, 3, 2, 1, reactions[3], users[2], posts[4]),
+    new PostReaction(2, 2, 4, 2, reactions[2], users[4], posts[5]),
+    new PostReaction(3, 3, 3, 3, reactions[1], users[3], posts[3]),
+    new PostReaction(4, 1, 2, 4, reactions[4], users[1], posts[2]),
+    new PostReaction(5, 5, 5, 5, reactions[7], users[6], posts[5])
+};
 
 var builder = WebApplication.CreateBuilder(args);
 
