@@ -6,11 +6,11 @@ public class Category
   public string Label { get; set; }
   public List<Post> Posts { get; set; }
 
-  public Category(int id, string label, List<Post> posts)
+  public Category(int id, string label, List<Post> posts = null)
   {
     Id = id;
     Label = label;
-    Posts = posts;
+    Posts = posts ?? new List<Post>(); 
   }
 }
 //test

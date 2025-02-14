@@ -33,6 +33,15 @@ List<Tag> tags = new List<Tag>
     new Tag(5, "Data Science"),
     new Tag(6, "Lifestyle"),
 };
+List<Category> categories = new List<Category>
+{
+    new Category(1, "Web Development", new List<Post>()),
+    new Category(2, "Artificial Intelligence", new List<Post>()),
+    new Category(3, "Cloud Computing", new List<Post>()),
+    new Category(4, "Cybersecurity", new List<Post>()),
+    new Category(5, "Data Science", new List<Post>()),
+    new Category(6, "Software Engineering", new List<Post>())
+};
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,4 +85,3 @@ app.UseHttpsRedirection();
 // Users
 
 app.Run();
-

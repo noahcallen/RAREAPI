@@ -13,7 +13,7 @@ public class Post
   public List<Comment> Comments { get; set; }
   public List<PostTag> PostTags { get; set; }
   public User User { get; set; }
-  public Category Category { get; set; }
+  public Category Category { get; set; } // Ensure this matches the class name
 
   public Post(
     int id,
