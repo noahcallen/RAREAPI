@@ -1,4 +1,5 @@
 using RAREAPI.Models;
+using System;
 
 public class Subscription
 {
@@ -22,4 +23,3 @@ public class Subscription
     User = user;
   }
 }
-//test2

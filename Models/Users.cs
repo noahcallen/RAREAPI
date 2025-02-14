@@ -1,4 +1,6 @@
+using RAREAPI.Models;
 namespace RAREAPI.Models;
+using System;
 
 public class User
 {
@@ -10,23 +12,12 @@ public class User
   public string Username { get; set; }
   public string Password { get; set; }
   public DateTime CreatedOn { get; set; }
-  public List<Subscription> Subscriptions { get; set; }
+  public List <Subscription> Subscriptions { get; set; }
   public List<PostReaction> PostReactions { get; set; }
   public List<Comment> Comments { get; set; }
   public List<Post> Posts { get; set; }
 
-  public User(
-      int id,
-      string firstName,
-      string lastName,
-      string email,
-      string bio,
-      string username,
-      string password,
-      List<Subscription> subscriptions = null,
-      List<PostReaction> postReactions = null,
-      List<Comment> comments = null,
-      List<Post> posts = null)
+  public User(int id, string firstName, string lastName, string email, string bio, string username, string password, List<Subscription> subscriptions = null, List<PostReaction> postReactions =null, List<Comment> comments = null, List<Post> posts = null)
   {
     Id = id;
     FirstName = firstName;
@@ -41,3 +32,4 @@ public class User
     Posts = posts ?? new List<Post>();
   }
 }
+//test2
