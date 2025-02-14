@@ -21,7 +21,7 @@ public class Post
     string title,
     DateTime publicationDate,
     string content,
-    bool approved
+    bool approved,
     List<Comment> comments = null,
     List<PostTag> postTags = null,
     User user = null,

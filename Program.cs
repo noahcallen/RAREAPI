@@ -24,6 +24,16 @@ List<Comment> comments = new List<Comment>
     new Comment(5, 6, 1, "Love this content! Keep it coming.", users[4])
 };
 
+List<Tag> tags = new List<Tag>
+{
+    new Tag(1, "Software Engineering"),
+    new Tag(2, "AI"),
+    new Tag(3, "Cloud"),
+    new Tag(4, "Cybersecurity"),
+    new Tag(5, "Data Science"),
+    new Tag(6, "Lifestyle"),
+};
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
