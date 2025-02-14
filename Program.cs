@@ -24,6 +24,16 @@ List<Comment> comments = new List<Comment>
     new Comment(5, 6, 1, "Love this content! Keep it coming.", users[4])
 };
 
+List<Category> categories = new List<Category>
+{
+    new Category(1, "Web Development", new List<Post>()),
+    new Category(2, "Artificial Intelligence", new List<Post>()),
+    new Category(3, "Cloud Computing", new List<Post>()),
+    new Category(4, "Cybersecurity", new List<Post>()),
+    new Category(5, "Data Science", new List<Post>()),
+    new Category(6, "Software Engineering", new List<Post>())
+};
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -66,4 +76,3 @@ app.UseHttpsRedirection();
 // Users
 
 app.Run();
-
