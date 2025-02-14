@@ -8,11 +8,11 @@ using RAREAPI.Models;
 List<User> users = new List<User>
 {
     new User(1, "Tion", "Blackmon", "tion.blackmon@rare_api.com", "Best bio ever", "tionb_rare", "N@cho"),
-    new User(2, "Noah", "Allen", "Noah.Allen@rare_api.com", "Passionate about coding and coffee.", "noahallen_rare", "C0ffeeLover"),  
-    new User(3, "Sirena", "Foster", "Sirena.Foster@rare_api.com", "Aspiring game developer and tech geek.", "sirenafoster_rare", "G@m3rX"),  
-    new User(4, "Brian", "Suttles", "Brian.Suttles@rare_api.com", "Lover of books, music, and late-night coding.", "briansuttles_rare", "B00kworm"),  
-    new User(5, "Ethan", "Martinez", "ethan.martinez@rare_api.com", "Building the future one app at a time.", "ethanm_rare", "D3vLife"),  
-    new User(6, "Ava", "Hernandez", "ava.hernandez@rare_api.com", "Traveler, foodie, and web dev enthusiast.", "avah_rare", "Gl0beTrotter")  
+    new User(2, "Noah", "Allen", "Noah.Allen@rare_api.com", "Passionate about coding and coffee.", "noahallen_rare", "C0ffeeLover"),
+    new User(3, "Sirena", "Foster", "Sirena.Foster@rare_api.com", "Aspiring game developer and tech geek.", "sirenafoster_rare", "G@m3rX"),
+    new User(4, "Brian", "Suttles", "Brian.Suttles@rare_api.com", "Lover of books, music, and late-night coding.", "briansuttles_rare", "B00kworm"),
+    new User(5, "Ethan", "Martinez", "ethan.martinez@rare_api.com", "Building the future one app at a time.", "ethanm_rare", "D3vLife"),
+    new User(6, "Ava", "Hernandez", "ava.hernandez@rare_api.com", "Traveler, foodie, and web dev enthusiast.", "avah_rare", "Gl0beTrotter")
 };
 
 List<Comment> comments = new List<Comment>
@@ -41,6 +41,15 @@ List<Category> categories = new List<Category>
     new Category(4, "Cybersecurity", new List<Post>()),
     new Category(5, "Data Science", new List<Post>()),
     new Category(6, "Software Engineering", new List<Post>())
+};
+
+List<Subscription> subscriptions = new List<Subscription>
+{
+    new Subscription(1, 1, 2, new DateTime(2025, 02, 12)),
+    new Subscription(2, 4, 3, new DateTime(2025, 02, 11)),
+    new Subscription(3, 5, 2, new DateTime(2025, 02, 13)),
+    new Subscription(4, 6, 4, new DateTime(2025, 02, 10)),
+    new Subscription(5, 3, 1, new DateTime(2025, 02, 09))
 };
 
 var builder = WebApplication.CreateBuilder(args);
