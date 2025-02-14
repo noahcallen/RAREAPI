@@ -13,7 +13,7 @@ public class Post
   public List<Comment> Comments { get; set; }
   public List<PostTag> PostTags { get; set; }
   public User User { get; set; }
-  public Category Category { get; set; }
+  public Category Category { get; set; } // Ensure this matches the class name
 
   public Post(
     int id,
@@ -21,7 +21,7 @@ public class Post
     string title,
     DateTime publicationDate,
     string content,
-    bool approved
+    bool approved, // <-- Added missing comma
     List<Comment> comments = null,
     List<PostTag> postTags = null,
     User user = null,
