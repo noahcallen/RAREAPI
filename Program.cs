@@ -52,6 +52,18 @@ List<Subscription> subscriptions = new List<Subscription>
     new Subscription(5, 3, 1, new DateTime(2025, 02, 09))
 };
 
+List<Reaction> reactions = new List<Reaction>
+{
+    new Reaction(1, "🔥"),
+    new Reaction(2, "😂"),
+    new Reaction(3, "❤️"),
+    new Reaction(4, "👍"),
+    new Reaction(5, "😮"),
+    new Reaction(6, "😢"),
+    new Reaction(7, "👏"),
+    new Reaction(8, "🎉")
+};
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
