@@ -1,5 +1,5 @@
 namespace RAREAPI.Models;
-
+using System;
 public class Reaction
 {
   public int Id { get; set; }
@@ -12,4 +12,4 @@ public class Reaction
     Emoji = emoji;
   }
 }
-//test
+//test2
