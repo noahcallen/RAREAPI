@@ -249,6 +249,65 @@ app.MapPost("/posts", (Post post) =>
 
 // Subscriptions
 
+// GET All Subscriptions
+
+app.MapGet("/subscriptions", () =>
+{
+    return subscriptions;
+});
+
+// GET Subscriptions by Id
+
+app.MapGet("/subscriptions/{id}", (int id) =>
+{
+    Subscription subscription = subscriptions.FirstOrDefault(s => s.Id == id);
+    if (subscription == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(subscription);
+});
+
+// POST Subscriptions
+
+app.MapPost("/subscriptions", (Subscription subscription) =>
+{
+    subscription.Id = subscriptions.Max(s => s.Id) + 1;
+    subscriptions.Add(subscription);
+    return subscription;
+});
+
+// PUT Subscriptions
+
+app.MapPut("/subscriptions/{id}", (int id, Subscription subscription) =>
+{
+    Subscription subscriptionToUpdate = subscriptions.FirstOrDefault(s => s.Id == id);
+    int subscriptionIndex = subscriptions.IndexOf(subscriptionToUpdate);
+    if (subscriptionToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != subscription.Id)
+    {
+        return Results.BadRequest();
+    }
+    subscriptions[subscriptionIndex] = subscription;
+    return Results.Ok(subscription);
+});
+
+// DELETE Subscriptions
+
+app.MapDelete("/subscriptions/{id}", (int id) =>
+{
+    Subscription subscription = subscriptions.FirstOrDefault(s => s.Id == id);
+    if (subscription == null)
+    {
+        return Results.NotFound();
+    }
+    subscriptions.Remove(subscription);
+    return Results.Ok();
+});
+
 // Users
 // GET
 app.MapGet("/users", () =>
