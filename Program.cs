@@ -165,7 +165,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ENDPOINTS
+// POST ENDPOINTS
+app.MapPost("/tags", (Tag tagPayload) =>
+{
+    tagPayload.Id = tags.Max(tP => tP.Id) + 1;
+    tags.Add(tagPayload);
+    return Results.Ok(tags);
+});
+app.MapPost("/reactions", (Reaction reactionPayload) =>
+{
+    reactionPayload.Id = reactions.Max(r => r.Id) + 1;
+    reactions.Add(reactionPayload);
+    return Results.Ok(reactions);
+});
+
+// GET ENDPOINTS
+// Tags
+app.MapGet("/tags", () => tags);
+app.MapGet("/tags/{id}", (int id) => tags.FirstOrDefault(t => t.Id == id));
+// Reactions
+app.MapGet("/reactions", () => reactions);
+app.MapGet("/reactions/{id}", (int id) => reactions.FirstOrDefault(r => r.Id == id));
 
 // Categories
 app.MapGet("/categories", () =>
@@ -258,13 +278,6 @@ app.MapPost("/posts", (Post post) =>
 
     return Results.Created($"/posts/{post.Id}", post);
 });
-
-
-// Tags
-app.MapGet("/tags", () => tags);
-
-// Reactions
-app.MapGet("/reactions", () => reactions);
 
 // Subscriptions
 
