@@ -189,6 +189,66 @@ app.MapGet("/reactions/{id}", (int id) => reactions.FirstOrDefault(r => r.Id == 
 
 // PostReactions
 
+// GET All PostReactions
+
+app.MapGet("/postreactions", () =>
+{
+    return postReactions;
+});
+
+// GET PostReactions by Id
+
+app.MapGet("/postreactions/{id}", (int id) =>
+{
+    PostReaction postReaction = postReactions.FirstOrDefault(pr => pr.Id == id);
+    if (postReaction == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(postReaction);
+});
+
+// POST PostReactions
+
+app.MapPost("/postreactions", (PostReaction postReaction) =>
+{
+    postReaction.Id = postReactions.Max(pr => pr.Id) + 1;
+    postReactions.Add(postReaction);
+    return postReaction;
+});
+
+// PUT PostReactions
+
+app.MapPut("/postreactions/{id}", (int id, PostReaction postReaction) =>
+{
+    PostReaction postReactionToUpdate = postReactions.FirstOrDefault(pr => pr.Id == id);
+    int postReactionIndex = postReactions.IndexOf(postReactionToUpdate);
+    if (postReactionToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    //the id in the request route doesn't match the id from the ticket in the request body. That's a bad request!
+    if (id != postReaction.Id)
+    {
+        return Results.BadRequest();
+    }
+    postReactions[postReactionIndex] = postReaction;
+    return Results.Ok();
+});
+
+// DELETE PostReactions
+
+app.MapDelete("/postreactions/{id}", (int id) =>
+{
+    PostReaction postReaction = postReactions.FirstOrDefault(pr => pr.Id == id);
+    if (postReaction == null)
+    {
+        return Results.NotFound();
+    }
+    postReactions.Remove(postReaction);
+    return Results.Ok();
+});
+
 // Posts
 
 // GET
