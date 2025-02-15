@@ -168,6 +168,12 @@ app.UseHttpsRedirection();
 
 // Posts
 
+app.MapGet("/posts", () =>
+{
+    return Results.Ok(posts);
+});
+
+
 // Tags
 
 // PostReactions
