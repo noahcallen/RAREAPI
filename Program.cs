@@ -170,20 +170,18 @@ app.UseHttpsRedirection();
 // PostReactions
 
 // Posts
-
 app.MapGet("/posts", () =>
 {
     return Results.Ok(posts);
 });
 
-
 // Tags
+app.MapGet("/tags", () => tags);
 
-// PostReactions
+// Reactions
+app.MapGet("/reactions", () => reactions);
 
 // Subscriptions
-
-// Tags
 
 // Users
 
