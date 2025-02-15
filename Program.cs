@@ -130,6 +130,10 @@ posts = new List<Post>
         categories[5])
 };
 
+foreach (var post in posts)
+{
+    post.Category.Posts.Add(post);
+}
 
 List<PostReaction> postReactions = new List<PostReaction>
 {
@@ -164,8 +168,36 @@ app.UseHttpsRedirection();
 // ENDPOINTS
 
 // Categories
+app.MapGet("/categories", () =>
+{
+    return Results.Ok(categories);
+});
+
+app.MapGet("/categories/{id}", (int id) =>
+{
+    var category = categories.FirstOrDefault(c => c.Id == id);
+    return category is not null ? Results.Ok(category) : Results.NotFound("Category not found.");
+});
+
+app.MapPost("/categories", (Category newCategory) =>
+{
+    newCategory.Id = categories.Any() ? categories.Max(c => c.Id) + 1 : 1;
+    newCategory.Posts = new List<Post>();
+    categories.Add(newCategory);
+    return Results.Created($"/categories/{newCategory.Id}", newCategory);
+});
 
 // Comments
+app.MapGet("/comments", () =>
+{
+    return Results.Ok(comments);
+});
+
+app.MapGet("/comments/{id}", (int id) =>
+{
+    var comment = comments.FirstOrDefault(c => c.Id == id);
+    return comment is not null ? Results.Ok(comment) : Results.NotFound("Comment not found.");
+});
 
 // PostReactions
 

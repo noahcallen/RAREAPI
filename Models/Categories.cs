@@ -1,6 +1,6 @@
 namespace RAREAPI.Models;
 
-public class Category
+public class Category 
 {
   public int Id { get; set; }
   public string Label { get; set; }
@@ -13,4 +13,3 @@ public class Category
     Posts = posts ?? new List<Post>(); 
   }
 }
-//test
