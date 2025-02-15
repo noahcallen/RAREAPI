@@ -282,5 +282,60 @@ app.MapPost("/posts", (Post post) =>
 // Subscriptions
 
 // Users
+// GET
+app.MapGet("/users", () =>
+{
+    return Results.Ok(users);
+});
+
+app.MapGet("/users/{id}", (int id) =>
+{
+    var user = users.FirstOrDefault(u => u.Id == id);
+    return user != null ? Results.Ok(user) : Results.NotFound($"User with ID {id} not found.");
+});
+
+//DELETE
+app.MapDelete("/users/{id}", (int id) =>
+{
+    var user = users.FirstOrDefault(u => u.Id == id);
+
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+    users.Remove(user);
+    return Results.Ok(user);
+});
+
+//PUT
+app.MapPut("/users/{id}", (int id, User user) =>
+{
+    User userToUpdate = users.FirstOrDefault(u => u.Id == id);
+    int userIndex = users.IndexOf(userToUpdate);
+    if (userToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != user.Id)
+    {
+        return Results.BadRequest();
+    }
+    users[userIndex] = userToUpdate;
+    return Results.Ok();
+});
+
+//POST
+app.MapPost("/users", (User user) =>
+{
+    if (user == null)
+    {
+        return Results.BadRequest("Invalid request body.");
+    }
+
+    user.Id = users.Any() ? users.Max(u => u.Id) + 1 : 1; // Auto-increment ID
+    users.Add(user);
+
+    return Results.Created($"/users/{user.Id}", user);
+});
 
 app.Run();
