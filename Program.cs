@@ -202,10 +202,63 @@ app.MapGet("/comments/{id}", (int id) =>
 // PostReactions
 
 // Posts
+
+// GET
 app.MapGet("/posts", () =>
 {
     return Results.Ok(posts);
 });
+
+app.MapGet("/posts/{id}", (int id) =>
+{
+    var post = posts.FirstOrDefault(p => p.Id == id);
+    return post != null ? Results.Ok(post) : Results.NotFound($"Post with ID {id} not found.");
+});
+
+//DELETE
+app.MapDelete("/posts/{id}", (int id) =>
+{
+    var post = posts.FirstOrDefault(p => p.Id == id);
+
+    if (post == null)
+    {
+        return Results.NotFound();
+    }
+    posts.Remove(post);
+    return Results.Ok(post);
+});
+
+//PUT
+app.MapPut("/posts/{id}", (int id, Post post) =>
+{
+    Post postToUpdate = posts.FirstOrDefault(p => p.Id == id);
+    int postIndex = posts.IndexOf(postToUpdate);
+    if (postToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != post.Id)
+    {
+        return Results.BadRequest();
+    }
+    posts[postIndex] = postToUpdate;
+    return Results.Ok();
+});
+
+//POST
+app.MapPost("/posts", (Post post) =>
+{
+    if (post == null)
+    {
+        return Results.BadRequest("Invalid request body.");
+    }
+
+    post.Id = posts.Any() ? posts.Max(p => p.Id) + 1 : 1; // Auto-increment ID
+    posts.Add(post);
+
+    return Results.Created($"/posts/{post.Id}", post);
+});
+
 
 // Tags
 app.MapGet("/tags", () => tags);
