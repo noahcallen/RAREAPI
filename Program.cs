@@ -18,10 +18,10 @@ List<User> users = new List<User>
 List<Comment> comments = new List<Comment>
 {
     new Comment(1, 2, 5, "This is an awesome post! Really enjoyed reading it.", users[1]),
-    new Comment(2, 3, 5, "Great insights! Thanks for sharing.",users[2]),
-    new Comment(3, 4, 7, "This helped me understand the topic better.",users[3]),
-    new Comment(4, 5, 3, "I totally agree with your perspective!",users[5]),
-    new Comment(5, 6, 1, "Love this content! Keep it coming.", users[4])
+    new Comment(2, 3, 5, "Great insights! Thanks for sharing.", users[2]),
+    new Comment(3, 4, 7, "This helped me understand the topic better.", users[3]),
+    new Comment(4, 5, 3, "I totally agree with your perspective!", users[4]), // Fixed from users[5]
+    new Comment(5, 6, 1, "Love this content! Keep it coming.", users[4]) // No change needed
 };
 
 List<Tag> tags = new List<Tag>
@@ -131,10 +131,10 @@ List<PostTag> postTags = new List<PostTag>
 List<PostReaction> postReactions = new List<PostReaction>
 {
     new PostReaction(1, 3, 2, 1, reactions[3], users[2], posts[4]),
-    new PostReaction(2, 2, 4, 2, reactions[2], users[4], posts[5]),
+    new PostReaction(2, 2, 4, 2, reactions[2], users[4], posts[4]), // Fixed from posts[5] → posts[4]
     new PostReaction(3, 3, 3, 3, reactions[1], users[3], posts[3]),
     new PostReaction(4, 1, 2, 4, reactions[4], users[1], posts[2]),
-    new PostReaction(5, 5, 5, 5, reactions[7], users[6], posts[5])
+    new PostReaction(5, 5, 5, 5, reactions[7], users[5], posts[4]) // Fixed from users[6] → users[5], posts[5] → posts[4]
 };
 
 var builder = WebApplication.CreateBuilder(args);

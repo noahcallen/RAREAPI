@@ -7,7 +7,7 @@ public class Comment
   public int PostId { get; set; }
   public string Content { get; set; }
   public User User { get; set; }
-  public Post Post { get; set; }
+  public Post ? Post { get; set; }
 
   public Comment(int id, int authorId, int postId, string content, User user)
   {
