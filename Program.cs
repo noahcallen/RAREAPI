@@ -64,15 +64,36 @@ List<Reaction> reactions = new List<Reaction>
     new Reaction(8, "🎉")
 };
 
+// Step 1: Declare posts list without postTags initially
+List<Post> posts = new List<Post>();
 
-// Step 1: Declare posts without postTags
-List<Post> posts = new List<Post>
+// Step 2: Define postTags now that posts exist
+List<PostTag> postTags = new List<PostTag>
+{
+    new PostTag(1, 2, tags[1], posts.Count > 0 ? posts[0] : null), // AI tag for "The Future of AI"
+    new PostTag(1, 5, tags[4], posts.Count > 1 ? posts[0] : null), // Data Science tag for "The Future of AI"
+
+    new PostTag(2, 1, tags[0], posts.Count > 1 ? posts[1] : null), // Software Engineering tag for "Web Development in 2025"
+    new PostTag(2, 6, tags[5], posts.Count > 1 ? posts[1] : null), // Lifestyle tag for "Web Development in 2025"
+
+    new PostTag(3, 3, tags[2], posts.Count > 2 ? posts[2] : null), // Cloud tag for "Cloud Security Best Practices"
+    new PostTag(3, 4, tags[3], posts.Count > 2 ? posts[2] : null), // Cybersecurity tag for "Cloud Security Best Practices"
+
+    new PostTag(4, 5, tags[4], posts.Count > 3 ? posts[3] : null), // Data Science tag for "Data Science and AI: A Perfect Match"
+    new PostTag(4, 2, tags[1], posts.Count > 3 ? posts[3] : null), // AI tag for "Data Science and AI: A Perfect Match"
+
+    new PostTag(5, 1, tags[0], posts.Count > 4 ? posts[4] : null), // Software Engineering tag for "Building Scalable Applications"
+    new PostTag(5, 3, tags[2], posts.Count > 4 ? posts[4] : null)  // Cloud tag for "Building Scalable Applications"
+};
+
+// Step 3: Now define posts with postTags assigned properly
+posts = new List<Post>
 {
     new Post(1, 1, "The Future of AI", new DateTime(2025, 02, 01),
         "AI is evolving rapidly. Here’s what to expect in the next decade.",
         true,
-        new List<Comment> { comments[0], comments[1] },
-        new List<PostTag>(), // Empty for now
+        new List<Comment> { comments[0], comments[1] }, // Assigning comments
+        new List<PostTag> { postTags[0], postTags[1] }, // Assigning post tags
         users[0],
         categories[1]),
 
@@ -80,7 +101,7 @@ List<Post> posts = new List<Post>
         "The latest trends in web development, from frameworks to design.",
         true,
         new List<Comment> { comments[2] },
-        new List<PostTag>(), // Empty for now
+        new List<PostTag> { postTags[2], postTags[3] },
         users[1],
         categories[0]),
 
@@ -88,45 +109,27 @@ List<Post> posts = new List<Post>
         "How to secure your cloud infrastructure in 2025.",
         true,
         new List<Comment> { comments[3] },
-        new List<PostTag>(), // Empty for now
+        new List<PostTag> { postTags[4], postTags[5] },
         users[2],
         categories[2]),
 
     new Post(4, 4, "Data Science and AI: A Perfect Match", new DateTime(2025, 01, 15),
         "Exploring how AI and data science work together for better insights.",
         true,
-        new List<Comment> { comments[4] },
-        new List<PostTag>(), // Empty for now
+        new List<Comment> { comments[4], comments[0] },
+        new List<PostTag> { postTags[6], postTags[7] },
         users[3],
         categories[4]),
 
     new Post(5, 5, "Building Scalable Applications", new DateTime(2025, 01, 10),
         "A guide to architecting scalable applications in the modern era.",
         true,
-        new List<Comment>(),
-        new List<PostTag>(), // Empty for now
+        new List<Comment> { comments[1], comments[3] },
+        new List<PostTag> { postTags[8], postTags[9] },
         users[4],
         categories[5])
 };
 
-// Step 2: Create postTags list
-List<PostTag> postTags = new List<PostTag>
-{
-    new PostTag(1, 2, tags[1], posts[0]), // AI tag for "The Future of AI"
-    new PostTag(1, 5, tags[4], posts[0]), // Data Science tag for "The Future of AI"
-
-    new PostTag(2, 1, tags[0], posts[1]), // Software Engineering tag for "Web Development in 2025"
-    new PostTag(2, 6, tags[5], posts[1]), // Lifestyle tag for "Web Development in 2025"
-
-    new PostTag(3, 3, tags[2], posts[2]), // Cloud tag for "Cloud Security Best Practices"
-    new PostTag(3, 4, tags[3], posts[2]), // Cybersecurity tag for "Cloud Security Best Practices"
-
-    new PostTag(4, 5, tags[4], posts[3]), // Data Science tag for "Data Science and AI: A Perfect Match"
-    new PostTag(4, 2, tags[1], posts[3]), // AI tag for "Data Science and AI: A Perfect Match"
-
-    new PostTag(5, 1, tags[0], posts[4]), // Software Engineering tag for "Building Scalable Applications"
-    new PostTag(5, 3, tags[2], posts[4])  // Cloud tag for "Building Scalable Applications"
-};
 
 List<PostReaction> postReactions = new List<PostReaction>
 {
