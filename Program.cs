@@ -180,9 +180,11 @@ app.MapPost("/reactions", (Reaction reactionPayload) =>
 });
 
 // GET ENDPOINTS
+
 // Tags
 app.MapGet("/tags", () => tags);
 app.MapGet("/tags/{id}", (int id) => tags.FirstOrDefault(t => t.Id == id));
+
 // Reactions
 app.MapGet("/reactions", () => reactions);
 app.MapGet("/reactions/{id}", (int id) => reactions.FirstOrDefault(r => r.Id == id));
@@ -197,14 +199,6 @@ app.MapGet("/categories/{id}", (int id) =>
 {
     var category = categories.FirstOrDefault(c => c.Id == id);
     return category is not null ? Results.Ok(category) : Results.NotFound("Category not found.");
-});
-
-app.MapPost("/categories", (Category newCategory) =>
-{
-    newCategory.Id = categories.Any() ? categories.Max(c => c.Id) + 1 : 1;
-    newCategory.Posts = new List<Post>();
-    categories.Add(newCategory);
-    return Results.Created($"/categories/{newCategory.Id}", newCategory);
 });
 
 // Comments
@@ -248,6 +242,29 @@ app.MapDelete("/posts/{id}", (int id) =>
     return Results.Ok(post);
 });
 
+app.MapDelete("/categories/{id}", (int id) =>
+{
+    var category = categories.FirstOrDefault(c => c.Id == id);
+    if (category is null)
+    {
+        return Results.NotFound("Category not found.");
+    }
+    // Optional: Remove all posts associated with this category if needed.
+    categories.Remove(category);
+    return Results.NoContent();
+});
+
+app.MapDelete("/comments/{id}", (int id) =>
+{
+    var comment = comments.FirstOrDefault(c => c.Id == id);
+    if (comment is null)
+    {
+        return Results.NotFound("Comment not found.");
+    }
+    comments.Remove(comment);
+    return Results.NoContent();
+});
+
 //PUT
 app.MapPut("/posts/{id}", (int id, Post post) =>
 {
@@ -277,6 +294,21 @@ app.MapPost("/posts", (Post post) =>
     posts.Add(post);
 
     return Results.Created($"/posts/{post.Id}", post);
+});
+
+app.MapPost("/categories", (Category newCategory) =>
+{
+    newCategory.Id = categories.Any() ? categories.Max(c => c.Id) + 1 : 1;
+    newCategory.Posts = new List<Post>();
+    categories.Add(newCategory);
+    return Results.Created($"/categories/{newCategory.Id}", newCategory);
+});
+
+app.MapPost("/comments", (Comment newComment) =>
+{
+    newComment.Id = comments.Any() ? comments.Max(c => c.Id) + 1 : 1;
+    comments.Add(newComment);
+    return Results.Created($"/comments/{newComment.Id}", newComment);
 });
 
 // Subscriptions
@@ -323,6 +355,33 @@ app.MapPut("/users/{id}", (int id, User user) =>
     users[userIndex] = userToUpdate;
     return Results.Ok();
 });
+
+app.MapPut("/categories/{id}", (int id, Category updatedCategory) =>
+{
+    var existingCategory = categories.FirstOrDefault(c => c.Id == id);
+    if (existingCategory is null)
+    {
+        return Results.NotFound("Category not found.");
+    }
+    existingCategory.Label = updatedCategory.Label;
+    
+    return Results.Ok(existingCategory);
+});
+
+app.MapPut("/comments/{id}", (int id, Comment updatedComment) =>
+{
+    var existingComment = comments.FirstOrDefault(c => c.Id == id);
+    if (existingComment is null)
+    {
+        return Results.NotFound("Comment not found.");
+    }
+    existingComment.Content = updatedComment.Content;
+    existingComment.PostId = updatedComment.PostId;
+    existingComment.User = updatedComment.User;
+    
+    return Results.Ok(existingComment);
+});
+
 
 //POST
 app.MapPost("/users", (User user) =>
