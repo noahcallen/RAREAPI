@@ -203,7 +203,12 @@ app.MapPost("/login", (LoginRequest loginRequest) =>
     var user = users.FirstOrDefault(user =>
         user.Username.Equals(loginRequest.Username, StringComparison.OrdinalIgnoreCase) &&
         user.Password == loginRequest.Password);
-    return Results.Ok(new { ResponseMessage = "Login successful!" });
+    return Results.Ok(new
+    {
+        ResponseMessage = "Login successful!",
+        Valid = true,
+        token = "Random token lol"
+    });
 });
 
 // GET ENDPOINTS
