@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity.Data;
 using RAREAPI.Models;
-
+using LoginRequest = RAREAPI.Models.LoginRequest;
 
 
 // ============================================== DATA SOURCE ==============================================
@@ -146,6 +147,19 @@ List<PostReaction> postReactions = new List<PostReaction>
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS to allow our frontend (localhost:3000) to access our web API. Cors is a security
+// in browsers that prevents web pages from making requests to a diff. domain than the one that
+// served the webpage. More info @ https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-9.0
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -164,6 +178,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 // POST ENDPOINTS
 app.MapPost("/tags", (Tag tagPayload) =>
@@ -177,6 +192,18 @@ app.MapPost("/reactions", (Reaction reactionPayload) =>
     reactionPayload.Id = reactions.Max(r => r.Id) + 1;
     reactions.Add(reactionPayload);
     return Results.Ok(reactions);
+});
+app.MapPost("/login", (LoginRequest loginRequest) =>
+{
+    if (string.IsNullOrEmpty(loginRequest.Username) || string.IsNullOrEmpty(loginRequest.Password))
+    {
+        return Results.BadRequest("Invalid login! Try again please.");
+    }
+
+    var user = users.FirstOrDefault(user =>
+        user.Username.Equals(loginRequest.Username, StringComparison.OrdinalIgnoreCase) &&
+        user.Password == loginRequest.Password);
+    return Results.Ok(new { ResponseMessage = "Login successful!" });
 });
 
 // GET ENDPOINTS
