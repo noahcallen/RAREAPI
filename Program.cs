@@ -312,7 +312,12 @@ app.MapDelete("/postreactions/{id}", (int id) =>
 // GET
 app.MapGet("/posts", () =>
 {
-    return Results.Ok(posts);
+    var sortedByDateRecentFirst = posts
+        .Where(p => p.PublicationDate.HasValue)
+        .OrderBy(p => p.PublicationDate)
+        .Reverse()
+        .ToList();
+    return Results.Ok(sortedByDateRecentFirst);
 });
 
 app.MapGet("/posts/{id}", (int id) =>
