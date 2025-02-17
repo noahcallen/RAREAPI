@@ -195,9 +195,15 @@ app.MapPost("/reactions", (Reaction reactionPayload) =>
 });
 app.MapPost("/login", (LoginRequest loginRequest) =>
 {
+    var userObj = users.FirstOrDefault(u => u.Username == loginRequest.Username && u.Password == loginRequest.Password);
     if (string.IsNullOrEmpty(loginRequest.Username) || string.IsNullOrEmpty(loginRequest.Password))
     {
-        return Results.BadRequest("Invalid login! Try again please.");
+        return Results.BadRequest("Nothing was entered. Try again.");
+    }
+
+    if (userObj.Username != loginRequest.Username && userObj.Password != loginRequest.Password)
+    {
+        return Results.BadRequest("Wrong username or password.");
     }
 
     var user = users.FirstOrDefault(user =>
