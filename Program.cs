@@ -544,6 +544,7 @@ app.MapPut("/comments/{id}", (int id, Comment updatedComment) =>
     return Results.Ok(existingComment);
 });
 
+//==========================================================================
 
 //POST
 app.MapPost("/users", (User user) =>
@@ -559,4 +560,66 @@ app.MapPost("/users", (User user) =>
     return Results.Created($"/users/{user.Id}", user);
 });
 
+//GET postTags
+
+// GET
+
+app.MapGet("/postTags", () =>
+{
+    return postTags;
+});
+
+app.MapGet("/postTags/{id}", (int id) =>
+{
+    PostTag postTag = postTags.FirstOrDefault(pt => pt.Id == id);
+    if (postTags == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(postTag);
+});
+
+
+//DELETE
+app.MapDelete("/postTags/{id}", (int id) =>
+{
+    var postTag = postTags.FirstOrDefault(pt => pt.Id == id);
+
+    if (postTag == null)
+    {
+        return Results.NotFound();
+    }
+    postTags.Remove(postTag);
+    return Results.Ok(postTag);
+});
+
+//POST
+app.MapPost("/postTags", (PostTag postTag) =>
+{
+    if (postTag == null)
+    {
+        return Results.BadRequest("Invalid request body.");
+    }
+
+    postTag.Id = postTags.Any() ? postTags.Max(pt => pt.Id) + 1 : 1; // Auto-increment ID
+    postTags.Add(postTag);
+
+    return Results.Created($"/users/{postTag.Id}", postTag);
+});
+
+app.MapPut("/postTags/{id}", (int id, PostTag postTag) =>
+{
+    PostTag postTagToUpdate = postTags.FirstOrDefault(pt => pt.Id == id);
+    int postTagsIndex = postTags.IndexOf(postTagToUpdate);
+    if (postTagToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != postTag.Id)
+    {
+        return Results.BadRequest();
+    }
+    postTags[postTagsIndex] = postTagToUpdate;
+    return Results.Ok();
+});
 app.Run();
